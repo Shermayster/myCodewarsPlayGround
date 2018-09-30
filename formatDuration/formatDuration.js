@@ -2,6 +2,7 @@
 export function formatDuration (seconds) {
   // Complete this function
   const formats = ['year', 'month', 'day', 'hour', 'minute', 'second'];
+  const fr
   const formatsData = {
     year: {
       inSeconds: 31556926,
