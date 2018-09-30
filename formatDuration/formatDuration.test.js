@@ -1,17 +1,17 @@
 import { formatDuration } from './formatDuration';
 
 test('should show 1 year', () => {
-  expect(formatDuration(31556926)).toBe('1 year');
+  expect(formatDuration(31536000)).toBe('1 year');
 })
 test('should show 2 years', () => {
-  expect(formatDuration(63113852)).toBe('2 years');
+  expect(formatDuration(31536000 * 2)).toBe('2 years');
 })
-test('should show 2 years and 2 month', () => {
-  expect(formatDuration(68373340)).toBe('2 years and 2 months');
+test('should show 2 years and 1 day', () => {
+  expect(formatDuration(2* 31536000 + 86400)).toBe('2 years and 1 day');
 });
 
-test('should show 2 years, 2 month and 1 second', () => {
-  expect(formatDuration(68373341)).toBe('2 years, 2 months and 1 second');
+test('should show 2 years and 1 second', () => {
+  expect(formatDuration(2 * 31536000 + 1)).toBe('2 years and 1 second');
 })
 test('1 second',() => {
   expect(formatDuration(1)).toBe('1 second');
