@@ -1,4 +1,8 @@
 export function toUnderscore(string) {
-  const result = String(string);
-  return result;
+  return String(string)
+  .split('')
+  .map((char, i) => (
+    char.match("[A-Z]") ? i === 0 ? char.toLowerCase() : `_${char.toLowerCase()}` : char
+  )
+  ).join('');
 }
