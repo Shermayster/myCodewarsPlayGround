@@ -1,9 +1,9 @@
 module.exports = function () {
 
   return {
-    files: ['formatDuration/*.js', '!**/*.test.js'],
+    files: ['src/**/*.js', '!src/**/*.test.js', '!node_m'],
 
-    tests: ['**/*.test.js'],
+    tests: ['src/**/*.test.js'],
 
     env: {
       type: 'node',
