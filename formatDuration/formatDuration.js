@@ -1,40 +1,22 @@
 
+  const formatsMap = new Map([
+    ['year', 31536000],
+    ['day', 86400],
+    ['hour', 3600],
+    ['minute', 60],
+    ['second', 1]
+  ]);
+
+  const getText = (number, text) =>  number === 1 ? text : `${text}s`;
+  const calculateFormatValue = (seconds, formatValueInSeconds) => Math.floor(seconds/formatValueInSeconds);
+
 export function formatDuration (seconds) {
   // Complete this function
-  const formats = ['year', 'month', 'day', 'hour', 'minute', 'second'];
-  const fr
-  const formatsData = {
-    year: {
-      inSeconds: 31556926,
-      name: 'year'
-    },
-    month: {
-      inSeconds: 2629744,
-      name: 'month'
-    },
-    day: {
-      inSeconds: 86400,
-      name: 'day'
-    },
-    hour: {
-      inSeconds: 3600,
-      name: 'hour'
-    },
-    minute: {
-      inSeconds: 60,
-      name: 'minute'
-    },
-    second: {
-      inSeconds: 1,
-      name: 'second'
-    }
-  }
-  return formats.reduce((prev, currentFormat) => {
-    if (prev.seconds >= formatsData[currentFormat].inSeconds) {
-      const formatValue = Math.floor(prev.seconds / formatsData[currentFormat].inSeconds);
-      const updatedSeconds = prev.seconds - (formatsData[currentFormat].inSeconds * formatValue);
-      prev.seconds = updatedSeconds;
-      prev.formatData.push({name: formatsData[currentFormat].name, value: formatValue});
+  return Array.from(formatsMap.keys()).reduce((prev, currentFormat) => {
+    if (prev.seconds >= formatsMap.get(currentFormat)) {
+      const formatValue = calculateFormatValue(prev.seconds,  formatsMap.get(currentFormat));
+      prev.seconds  = calculateRestSeconds(prev, currentFormat, formatValue);
+      prev.formatData.push({name: currentFormat, value: formatValue});
     }
     return prev;
   }, {formatData: [], seconds: seconds})
@@ -48,6 +30,9 @@ export function formatDuration (seconds) {
       `${currentFormat}, ${result}`
   }, '');
 }
-function getText(number, text) {
-  return number === 1 ? text : `${text}s`
+
+
+function calculateRestSeconds(prev, currentFormat, formatValue) {
+  return prev.seconds - (formatsMap.get(currentFormat) * formatValue);
 }
+
